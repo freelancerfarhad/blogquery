@@ -8,9 +8,18 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Emailcontroller;
+use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PastController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
+  //
+
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -18,6 +27,7 @@ use App\Http\Controllers\Emailcontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/uses/create',[UserController::class, 'create'])->name('uses.create');
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -63,6 +73,31 @@ use App\Http\Controllers\Emailcontroller;
   Route::get('/students/{id}/edit',[StudentController::class, 'edit'])->name('students.edit');
   Route::patch('/students/{id}/update',[StudentController::class, 'update'])->name('students.update');
   Route::delete('/students/{id}/delete',[StudentController::class, 'destroy'])->name('students.destroy');
-    //.....email.....//
-    Route::get('/emails',[Emailcontroller::class, 'sending'])->name('emails.home');
-    Route::post('/emails/store',[Emailcontroller::class, 'store'])->name('emails.store');
+  //.....email.....//
+  Route::get('/emails',[Emailcontroller::class, 'sending'])->name('emails.home');
+  Route::post('/emails/store',[Emailcontroller::class, 'store'])->name('emails.store');
+  //.....image upload.....//
+  Route::get('/images/create',[ImagesController::class, 'create'])->name('images.home');
+  Route::post('/images/store',[ImagesController::class, 'store'])->name('images.store');
+
+  //.....morphs post user imageable.....//
+  Route::get('/users',[PersonController::class, 'index'])->name('users.home');
+  Route::get('/users/create',[PersonController::class, 'create'])->name('users.home');
+  Route::post('/users/store',[PersonController::class, 'store'])->name('users.store');
+
+  //.....morphs post user imageable.....//
+  Route::get('/pasts/create',[PastController::class, 'create'])->name('pasts.home');
+  Route::post('/pasts/store',[PastController::class, 'store'])->name('pasts.store');
+  
+//.....video.....//
+  Route::resource('/videos',VideoController::class);
+  //.....comment.....//
+  Route::post('/videos/{id}/comments',[CommentController::class,'store']);
+
+  //.....tag.....//
+  Route::resource('/tags',TagsController::class);
+
+
+  // Route::get('/uses',UserController::class);
+  Route::get('/uses/create',[UserController::class, 'create'])->name('uses.create');
+  Route::post('/uses/store',[UserController::class, 'store'])->name('uses.store');

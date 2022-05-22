@@ -69,8 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
